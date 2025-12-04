@@ -82,6 +82,12 @@ export default function Home() {
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {[
                     {
+                      title: "Array & ArrayList",
+                      description: "Visualize operations on Array and ArrayList",
+                      href: "/array",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
                       title: "Linked List",
                       description: "Visualize operations on a singly linked list",
                       href: "/linked-list",
@@ -470,7 +476,7 @@ export default function Home() {
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center gap-3">
             <p className="text-center text-sm text-white/60">
-              Data Structures Visualizer - An interactive learning tool created by Pau Aranega Bellido
+              DS EZLearn - Data Structure learning easy - alphanov | Credit to: Pau Aranega Bellido
             </p>
             <div className="flex items-center gap-4">
               <a
