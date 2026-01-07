@@ -20,56 +20,6 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            <Card className="card-gradient">
-              <CardHeader>
-                <CardTitle className="text-white">Start Learning</CardTitle>
-                <CardDescription className="text-white/70">
-                  Begin your journey through our interactive data structure tutorials
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/80 mb-6">
-                  Our step-by-step tutorials will guide you through the fundamentals of data structures, from basic
-                  concepts to advanced operations.
-                </p>
-                <Link href="/linked-list">
-                  <Button className="w-full">
-                    Start Exploring
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="card-gradient">
-              <CardHeader>
-                <CardTitle className="text-white">Available Visualizations</CardTitle>
-                <CardDescription className="text-white/70">What you'll learn in these tutorials</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-white/80">
-                  <li className="flex items-start">
-                    <List className="mr-2 h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Linked Lists, Stacks, and Queues</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Hash className="mr-2 h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Hash Tables and their operations</span>
-                  </li>
-                  <li className="flex items-start">
-                    <GitBranch className="mr-2 h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Trees and recursive algorithms</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Network className="mr-2 h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
-                    <span>Graphs and traversal algorithms</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-
           <div className="mt-12">
             <Card className="card-gradient">
               <CardHeader>
@@ -87,6 +37,357 @@ export default function Home() {
                       description: "Visualize operations on Array and ArrayList",
                       href: "/array",
                       icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 2</CardTitle>
+                <CardDescription className="text-white/70">
+                  Linked List
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Linked List",
+                      description: "Visualize operations on a singly linked list",
+                      href: "/linked-list",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 3</CardTitle>
+                <CardDescription className="text-white/70">
+                  Stack
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Stack",
+                      description: "Explore LIFO data structure operations",
+                      href: "/stack",
+                      icon: <BarChart3 className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 4</CardTitle>
+                <CardDescription className="text-white/70">
+                  Queue
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Queue",
+                      description: "Understand FIFO data structure operations",
+                      href: "/queue",
+                      icon: <AlignJustify className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
+                      title: "Introduction to Queues",
+                      description: "Learn what queues are and the FIFO principle",
+                      href: "/tutorials/queue/introduction",
+                    },
+                    {
+                      title: "Enqueue Operation",
+                      description: "Add elements to the end of the queue",
+                      href: "/tutorials/queue/enqueue-operation",
+                    },
+                    {
+                      title: "Dequeue Operation",
+                      description: "Remove elements from the front of the queue",
+                      href: "/tutorials/queue/dequeue-operation",
+                    },
+                    {
+                      title: "Peek Operation",
+                      description: "View the front element without removing it",
+                      href: "/tutorials/queue/peek-operation",
+                    },
+                    {
+                      title: "Applications of Queues",
+                      description: "Explore real-world uses of queue data structures",
+                      href: "/tutorials/queue/applications",
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 5</CardTitle>
+                <CardDescription className="text-white/70">
+                  Recursion
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Array & ArrayList",
+                      description: "Visualize operations on Array and ArrayList",
+                      href: "/array",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 6</CardTitle>
+                <CardDescription className="text-white/70">
+                  Tree
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Array & ArrayList",
+                      description: "Visualize operations on Array and ArrayList",
+                      href: "/array",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 7</CardTitle>
+                <CardDescription className="text-white/70">
+                  Sorting
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Array & ArrayList",
+                      description: "Visualize operations on Array and ArrayList",
+                      href: "/array",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 8</CardTitle>
+                <CardDescription className="text-white/70">
+                  Search
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Hash Table",
+                      description: "Visualize key-value storage with hashing",
+                      href: "/hash-table",
+                      icon: <Hash className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
+                <CardTitle className="text-white">Chapter 9</CardTitle>
+                <CardDescription className="text-white/70">
+                  Graph
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Binary Tree",
+                      description: "Explore hierarchical data structure operations",
+                      href: "/binary-tree",
+                      icon: <GitBranch className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
+                      title: "Graph",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/graph",
+                      icon: <Network className="h-10 w-10 text-purple-400" />,
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
