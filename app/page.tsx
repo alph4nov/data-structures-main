@@ -73,11 +73,52 @@ export default function Home() {
           <div className="mt-12">
             <Card className="card-gradient">
               <CardHeader>
+                <CardTitle className="text-white">Chapter 1</CardTitle>
+                <CardDescription className="text-white/70">
+                  Array & ArrayList
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  {[
+                    {
+                      title: "Array & ArrayList",
+                      description: "Visualize operations on Array and ArrayList",
+                      href: "/array",
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                  ].map((item, index) => (
+                    <Link key={index} href={item.href} className="group">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                        <CardHeader className="pb-2">
+                          <div className="mb-2">{item.icon}</div>
+                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-white/70 text-sm">{item.description}</p>
+                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
+                            Explore
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <Card className="card-gradient">
+              <CardHeader>
                 <CardTitle className="text-white">Data Structure Visualizations</CardTitle>
                 <CardDescription className="text-white/70">
                   Explore our comprehensive data structure visualizations
                 </CardDescription>
               </CardHeader>
+
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {[
