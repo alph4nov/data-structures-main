@@ -1,9 +1,9 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
-import Link from "next/link" // Added import for navigation
+import Link from "next/link"
 import { ArrowLeft, ChevronRight, Info, Plus, Trash, BookOpen, Code, Linkedin, Github, Edit, Search } from "lucide-react"
 
-// Simplified components (inline definitions)
+// Simplified components (inline definitions) - UPDATED to match page.tsx style
 interface ButtonProps {
   children: React.ReactNode
   className?: string
@@ -16,9 +16,9 @@ interface ButtonProps {
 const Button = ({ children, className = "", variant = "default", size = "default", disabled = false, onClick }: ButtonProps) => {
   const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none"
   const variants = {
-    default: "bg-purple-600 text-white hover:bg-purple-700",
-    outline: "border border-white/20 bg-white/5 hover:bg-white/10 text-white",
-    destructive: "bg-red-600 text-white hover:bg-red-700"
+    default: "bg-primary text-primary-foreground hover:bg-primary/90",
+    outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90"
   }
   const sizes = {
     default: "h-10 py-2 px-4",
@@ -36,19 +36,19 @@ const Button = ({ children, className = "", variant = "default", size = "default
 }
 
 const Card = ({ children, className = "" }: any) => (
-  <div className={`rounded-lg border border-white/10 bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur ${className}`}>
+  <div className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}>
     {children}
   </div>
 )
 
 const CardHeader = ({ children }: any) => <div className="flex flex-col space-y-1.5 p-6">{children}</div>
 const CardTitle = ({ children, className = "" }: any) => <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`}>{children}</h3>
-const CardDescription = ({ children, className = "" }: any) => <p className={`text-sm ${className}`}>{children}</p>
+const CardDescription = ({ children, className = "" }: any) => <p className={`text-sm text-muted-foreground ${className}`}>{children}</p>
 const CardContent = ({ children, className = "" }: any) => <div className={`p-6 pt-0 ${className}`}>{children}</div>
 
 const Input = ({ className = "", ...props }: any) => (
   <input
-    className={`flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 ${className}`}
+    className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     {...props}
   />
 )
@@ -63,7 +63,7 @@ const Tabs = ({ children, defaultValue, className = "" }: any) => {
 }
 
 const TabsList = ({ children, className = "" }: any) => (
-  <div className={`inline-flex h-10 items-center justify-center rounded-md bg-white/5 p-1 text-white/70 ${className}`}>
+  <div className={`inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground ${className}`}>
     {children}
   </div>
 )
@@ -75,13 +75,12 @@ const TabsTrigger = ({ children, value, className = "" }: any) => {
   
   return (
     <button
-      className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all ${
-        isActive ? 'bg-purple-600 text-white shadow-sm' : 'hover:bg-white/10'
+      className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+        isActive ? 'bg-background text-foreground shadow-sm' : 'hover:bg-accent hover:text-accent-foreground'
       } ${className}`}
       onClick={() => {
         const parent = document.querySelector(`[data-active-tab]`)
         if (parent) parent.setAttribute('data-active-tab', value)
-        // Force re-render
         window.dispatchEvent(new Event('tabchange'))
       }}
     >
@@ -109,7 +108,7 @@ const TabsContent = ({ children, value, className = "" }: any) => {
   
   if (activeTab !== value) return null
   
-  return <div className={`mt-2 ${className}`}>{children}</div>
+  return <div className={`mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`}>{children}</div>
 }
 
 const Select = ({ children, value, onValueChange, disabled = false }: any) => {
@@ -118,7 +117,7 @@ const Select = ({ children, value, onValueChange, disabled = false }: any) => {
       value={value}
       onChange={(e) => onValueChange(e.target.value)}
       disabled={disabled}
-      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {children}
     </select>
@@ -130,19 +129,19 @@ const SelectValue = ({ placeholder }: any) => <option value="">{placeholder}</op
 const SelectContent = ({ children }: any) => <>{children}</>
 const SelectItem = ({ children, value }: any) => <option value={value}>{children}</option>
 
-// Code Block Component with syntax highlighting
+// Code Block Component with syntax highlighting - UPDATED colors
 const CodeBlock = ({ code, language = "typescript", highlightLines = [], className = "" }: any) => {
   const lines = code.split('\n')
   
   return (
-    <pre className={`text-sm p-4 overflow-auto ${className}`}>
+    <pre className={`text-sm p-4 overflow-auto bg-black/50 rounded-md ${className}`}>
       <code>
         {lines.map((line: string, index: number) => (
           <div
             key={index}
-            className={`${highlightLines.includes(index + 1) ? 'bg-purple-500/30 border-l-2 border-purple-400 pl-2 -ml-2' : ''}`}
+            className={`${highlightLines.includes(index + 1) ? 'bg-primary/30 border-l-2 border-primary pl-2 -ml-2' : ''}`}
           >
-            <span className="text-white/40 select-none mr-4">{index + 1}</span>
+            <span className="text-muted-foreground select-none mr-4">{index + 1}</span>
             <span className="text-green-300">{line}</span>
           </div>
         ))}
@@ -151,7 +150,7 @@ const CodeBlock = ({ code, language = "typescript", highlightLines = [], classNa
   )
 }
 
-// Array class implementation
+// Array class implementation (same as before)
 class DynamicArray {
   private items: (number | null)[]
   private capacity: number
@@ -163,7 +162,6 @@ class DynamicArray {
     this.items = new Array(this.capacity).fill(null)
   }
 
-  // Insert at end
   push(value: number) {
     if (this.size === this.capacity) {
       this.resize()
@@ -173,7 +171,6 @@ class DynamicArray {
     return this
   }
 
-  // Insert at specific index
   insertAt(index: number, value: number) {
     if (index < 0 || index > this.size) return this
     
@@ -181,7 +178,6 @@ class DynamicArray {
       this.resize()
     }
 
-    // Shift elements to the right
     for (let i = this.size; i > index; i--) {
       this.items[i] = this.items[i - 1]
     }
@@ -191,11 +187,9 @@ class DynamicArray {
     return this
   }
 
-  // Delete at specific index
   deleteAt(index: number) {
     if (index < 0 || index >= this.size) return this
 
-    // Shift elements to the left
     for (let i = index; i < this.size - 1; i++) {
       this.items[i] = this.items[i + 1]
     }
@@ -205,7 +199,6 @@ class DynamicArray {
     return this
   }
 
-  // Pop from end
   pop() {
     if (this.size > 0) {
       this.items[this.size - 1] = null
@@ -214,7 +207,6 @@ class DynamicArray {
     return this
   }
 
-  // Update value at index
   update(index: number, value: number) {
     if (index >= 0 && index < this.size) {
       this.items[index] = value
@@ -222,7 +214,6 @@ class DynamicArray {
     return this
   }
 
-  // Search for value
   search(value: number) {
     for (let i = 0; i < this.size; i++) {
       if (this.items[i] === value) {
@@ -232,7 +223,6 @@ class DynamicArray {
     return -1
   }
 
-  // Resize array (double capacity)
   private resize() {
     this.capacity *= 2
     const newItems = new Array(this.capacity).fill(null)
@@ -242,17 +232,14 @@ class DynamicArray {
     this.items = newItems
   }
 
-  // Get array representation
   toArray() {
     return this.items.slice(0, this.size)
   }
 
-  // Get full array with empty slots
   getFullArray() {
     return this.items
   }
 
-  // Get size and capacity
   getSize() {
     return this.size
   }
@@ -278,7 +265,6 @@ export default function ArrayVisualizerPage() {
   const [highlightedLines, setHighlightedLines] = useState<number[]>([])
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Code highlighting ranges
   const codeHighlightRanges = {
     push: [2, 3, 4, 5, 6, 7],
     insertAt: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
@@ -616,15 +602,15 @@ export default function ArrayVisualizerPage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
-      <header className="border-b border-white/10 bg-black/20">
+    <div className="min-h-screen flex flex-col">
+      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-purple-400 transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-lg font-semibold hover:text-primary transition-colors">
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Home</span>
           </Link>
           <div className="ml-auto">
-            <Link href="/tutorials/introduction">
+            <Link href="/tutorials/arrayList/introduction">
               <Button variant="outline" className="gap-2">
                 <BookOpen className="h-4 w-4" />
                 Tutorial Mode
@@ -639,10 +625,10 @@ export default function ArrayVisualizerPage() {
           <div className="mx-auto max-w-6xl">
             <div className="flex flex-col gap-8">
               <div>
-                <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+                <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-pink-400">
                   Array & ArrayList Visualization
                 </h1>
-                <p className="mt-2 text-lg text-white/80">
+                <p className="mt-2 text-lg text-muted-foreground">
                   Visualize dynamic array operations and understand capacity management
                 </p>
               </div>
@@ -651,15 +637,15 @@ export default function ArrayVisualizerPage() {
                 <div className="lg:col-span-2">
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-white">Array Visualization</CardTitle>
-                      <CardDescription className="text-white/70">
+                      <CardTitle>Array Visualization</CardTitle>
+                      <CardDescription>
                         Size: {array.getSize()} | Capacity: {array.getCapacity()}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="relative min-h-[200px] flex items-center justify-center p-4">
                         {arrayData.length === 0 ? (
-                          <div className="text-center text-white/60">
+                          <div className="text-center text-muted-foreground">
                             <p>The array is empty</p>
                             <p className="text-sm">Use the controls to add elements</p>
                           </div>
@@ -667,14 +653,14 @@ export default function ArrayVisualizerPage() {
                           <div className="flex flex-wrap gap-2 justify-center">
                             {fullArray.map((val, idx) => (
                               <div key={idx} className="flex flex-col items-center gap-1">
-                                <div className="text-xs text-white/50 font-mono">{idx}</div>
+                                <div className="text-xs text-muted-foreground font-mono">{idx}</div>
                                 <div
                                   className={`
                                     w-16 h-16 flex items-center justify-center border-2 rounded-lg font-mono text-lg
                                     transition-all duration-300
-                                    ${val === null ? 'border-white/20 bg-white/5 text-white/30' : 'border-purple-400 bg-purple-500/20 text-white'}
-                                    ${animationIndex === idx && animationStep === 1 ? 'ring-4 ring-yellow-400 scale-110' : ''}
-                                    ${animationIndex === idx && animationStep === 2 ? 'ring-4 ring-green-400 scale-110' : ''}
+                                    ${val === null ? 'border-border bg-muted text-muted-foreground' : 'border-primary bg-primary/10 text-foreground'}
+                                    ${animationIndex === idx && animationStep === 1 ? 'ring-4 ring-yellow-500 scale-110' : ''}
+                                    ${animationIndex === idx && animationStep === 2 ? 'ring-4 ring-green-500 scale-110' : ''}
                                   `}
                                 >
                                   {val ?? '—'}
@@ -686,9 +672,9 @@ export default function ArrayVisualizerPage() {
                       </div>
 
                       {isAnimating && (
-                        <div className="mt-4 p-3 bg-purple-900/30 border border-purple-500/50 rounded-md">
-                          <p className="font-medium text-white">{operationDescription}</p>
-                          <p className="text-sm text-white/70 mt-1">
+                        <div className="mt-4 p-3 bg-muted border border-border rounded-md">
+                          <p className="font-medium">{operationDescription}</p>
+                          <p className="text-sm text-muted-foreground mt-1">
                             {animationStep === 1 && "Processing operation..."}
                             {animationStep === 2 && "Operation completed successfully"}
                             {animationStep === 3 && "Value not found in the array"}
@@ -697,7 +683,7 @@ export default function ArrayVisualizerPage() {
                       )}
 
                       {searchResult !== null && !isAnimating && (
-                        <div className={`mt-4 p-3 rounded-md ${searchResult >= 0 ? 'bg-green-900/50 border border-green-500 text-white' : 'bg-red-900/50 border border-red-500 text-white'}`}>
+                        <div className={`mt-4 p-3 rounded-md ${searchResult >= 0 ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`}>
                           <p className="font-medium">
                             {searchResult >= 0 ? `Value found at index ${searchResult}` : "Value not found in the array"}
                           </p>
@@ -709,11 +695,11 @@ export default function ArrayVisualizerPage() {
                   <Card className="mt-6">
                     <CardHeader className="flex flex-row items-center justify-between">
                       <div>
-                        <CardTitle className="text-white flex items-center">
+                        <CardTitle className="flex items-center">
                           <Code className="mr-2 h-5 w-5" />
                           Implementation Code
                         </CardTitle>
-                        <CardDescription className="text-white/70">
+                        <CardDescription>
                           {activeOperation ? `Highlighting: ${activeOperation}` : "Select an operation to view implementation"}
                         </CardDescription>
                       </div>
@@ -732,7 +718,7 @@ export default function ArrayVisualizerPage() {
                       )}
                     </CardHeader>
                     <CardContent>
-                      <div className="bg-black/50 rounded-md overflow-hidden border border-white/10">
+                      <div className="bg-background/50 rounded-md overflow-hidden border">
                         <CodeBlock
                           code={displayedCode}
                           language="typescript"
@@ -747,8 +733,8 @@ export default function ArrayVisualizerPage() {
                 <div>
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-white">Operations</CardTitle>
-                      <CardDescription className="text-white/70">Perform array operations</CardDescription>
+                      <CardTitle>Operations</CardTitle>
+                      <CardDescription>Perform array operations</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Tabs defaultValue="insert" className="w-full">
@@ -761,7 +747,7 @@ export default function ArrayVisualizerPage() {
 
                         <TabsContent value="insert" className="space-y-4">
                           <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">Value</label>
+                            <label className="text-sm font-medium">Value</label>
                             <Input
                               type="number"
                               placeholder="Enter a number"
@@ -776,9 +762,9 @@ export default function ArrayVisualizerPage() {
                             Push (Add to End)
                           </Button>
 
-                          <div className="border-t border-white/10 pt-4">
+                          <div className="border-t border-border pt-4">
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-white">Insert at Index</label>
+                              <label className="text-sm font-medium">Insert at Index</label>
                               <Input
                                 type="number"
                                 placeholder="Index"
@@ -801,9 +787,9 @@ export default function ArrayVisualizerPage() {
                             Pop (Remove from End)
                           </Button>
 
-                          <div className="border-t border-white/10 pt-4">
+                          <div className="border-t border-border pt-4">
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-white">Delete at Index</label>
+                              <label className="text-sm font-medium">Delete at Index</label>
                               <Input
                                 type="number"
                                 placeholder="Index"
@@ -822,7 +808,7 @@ export default function ArrayVisualizerPage() {
 
                         <TabsContent value="update" className="space-y-4">
                           <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">Index</label>
+                            <label className="text-sm font-medium">Index</label>
                             <Input
                               type="number"
                               placeholder="Index"
@@ -834,7 +820,7 @@ export default function ArrayVisualizerPage() {
                           </div>
 
                           <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">New Value</label>
+                            <label className="text-sm font-medium">New Value</label>
                             <Input
                               type="number"
                               placeholder="Enter new value"
@@ -852,7 +838,7 @@ export default function ArrayVisualizerPage() {
 
                         <TabsContent value="search" className="space-y-4">
                           <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">Value to Search</label>
+                            <label className="text-sm font-medium">Value to Search</label>
                             <Input
                               type="number"
                               placeholder="Enter a number"
@@ -873,47 +859,47 @@ export default function ArrayVisualizerPage() {
 
                   <Card className="mt-6">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-white">
-                        <Info className="h-5 w-5 text-purple-400" />
+                      <CardTitle className="flex items-center gap-2">
+                        <Info className="h-5 w-5 text-primary" />
                         Array Properties
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4 text-sm">
                         <div>
-                          <h4 className="font-medium text-white">Structure</h4>
-                          <p className="text-white/70 mt-1">
+                          <h4 className="font-medium">Structure</h4>
+                          <p className="text-muted-foreground mt-1">
                             A dynamic array automatically resizes when capacity is reached, doubling its size to accommodate new elements.
                           </p>
                         </div>
 
                         <div className="space-y-2">
-                          <h4 className="font-medium text-white">Time Complexity</h4>
+                          <h4 className="font-medium">Time Complexity</h4>
                           <div className="flex justify-between">
-                            <span className="text-white/70">Access by Index:</span>
-                            <span className="font-mono text-purple-300">O(1)</span>
+                            <span className="text-muted-foreground">Access by Index:</span>
+                            <span className="font-mono text-primary">O(1)</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/70">Push (Amortized):</span>
-                            <span className="font-mono text-purple-300">O(1)</span>
+                            <span className="text-muted-foreground">Push (Amortized):</span>
+                            <span className="font-mono text-primary">O(1)</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/70">Insert at Index:</span>
-                            <span className="font-mono text-purple-300">O(n)</span>
+                            <span className="text-muted-foreground">Insert at Index:</span>
+                            <span className="font-mono text-primary">O(n)</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/70">Delete at Index:</span>
-                            <span className="font-mono text-purple-300">O(n)</span>
+                            <span className="text-muted-foreground">Delete at Index:</span>
+                            <span className="font-mono text-primary">O(n)</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/70">Search:</span>
-                            <span className="font-mono text-purple-300">O(n)</span>
+                            <span className="text-muted-foreground">Search:</span>
+                            <span className="font-mono text-primary">O(n)</span>
                           </div>
                         </div>
 
                         <div>
-                          <h4 className="font-medium text-white">Applications</h4>
-                          <ul className="list-disc list-inside text-white/70 mt-1 space-y-1">
+                          <h4 className="font-medium">Applications</h4>
+                          <ul className="list-disc list-inside text-muted-foreground mt-1 space-y-1">
                             <li>Implementing dynamic lists</li>
                             <li>Stack and queue implementations</li>
                             <li>Storing and processing collections</li>
@@ -922,13 +908,22 @@ export default function ArrayVisualizerPage() {
                         </div>
 
                         <div>
-                          <h4 className="font-medium text-white">Advantages</h4>
-                          <ul className="list-disc list-inside text-white/70 mt-1 space-y-1">
+                          <h4 className="font-medium">Advantages</h4>
+                          <ul className="list-disc list-inside text-muted-foreground mt-1 space-y-1">
                             <li>Fast random access O(1)</li>
                             <li>Cache-friendly (contiguous memory)</li>
                             <li>Automatic memory management</li>
                             <li>Dynamic sizing</li>
                           </ul>
+                        </div>
+
+                        <div className="pt-4 mt-4 border-t border-border">
+                          <Link href="/tutorials/arrayList/introduction">
+                            <Button variant="outline" size="sm" className="w-full">
+                              <BookOpen className="mr-2 h-4 w-4" />
+                              Learn More in Tutorial Mode
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     </CardContent>
@@ -940,32 +935,12 @@ export default function ArrayVisualizerPage() {
         </div>
       </main>
 
-      <footer className="border-t border-white/10 py-6 bg-black/20">
+      <footer className="border-t border-border py-6 bg-muted/40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center gap-3">
-            <p className="text-center text-sm text-white/60">
+            <p className="text-center text-sm text-muted-foreground">
               Data Structures Visualizer - An interactive learning tool
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://www.linkedin.com/in/pauaranegabellido"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="text-sm">LinkedIn</span>
-              </a>
-              <a
-                href="https://github.com/paudefclasspy/data-structures"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
-              >
-                <Github className="h-4 w-4" />
-                <span className="text-sm">GitHub</span>
-              </a>
-            </div>
           </div>
         </div>
       </footer>

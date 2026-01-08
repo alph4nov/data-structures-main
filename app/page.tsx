@@ -99,7 +99,7 @@ export default function Home() {
                       title: "Graph",
                       description: "Visualize nodes and edges with traversals",
                       onClick: () => {
-                        const element = document.getElementById('chapter-8');
+                        const element = document.getElementById('chapter-9');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
@@ -616,12 +616,6 @@ export default function Home() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {[
-                    {
-                      title: "Binary Tree",
-                      description: "Explore hierarchical data structure operations",
-                      href: "/binary-tree",
-                      icon: <GitBranch className="h-10 w-10 text-purple-400" />,
-                    },
                     {
                       title: "Graph",
                       description: "Visualize nodes and edges with traversals",
