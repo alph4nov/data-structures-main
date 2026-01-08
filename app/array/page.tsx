@@ -1,9 +1,19 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
+import Link from "next/link" // Added import for navigation
 import { ArrowLeft, ChevronRight, Info, Plus, Trash, BookOpen, Code, Linkedin, Github, Edit, Search } from "lucide-react"
 
 // Simplified components (inline definitions)
-const Button = ({ children, className = "", variant = "default", size = "default", disabled = false, onClick }: any) => {
+interface ButtonProps {
+  children: React.ReactNode
+  className?: string
+  variant?: "default" | "outline" | "destructive"
+  size?: "default" | "sm"
+  disabled?: boolean
+  onClick?: () => void
+}
+
+const Button = ({ children, className = "", variant = "default", size = "default", disabled = false, onClick }: ButtonProps) => {
   const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none"
   const variants = {
     default: "bg-purple-600 text-white hover:bg-purple-700",
@@ -143,7 +153,7 @@ const CodeBlock = ({ code, language = "typescript", highlightLines = [], classNa
 
 // Array class implementation
 class DynamicArray {
-  private items: number[]
+  private items: (number | null)[]
   private capacity: number
   private size: number
 
@@ -254,7 +264,7 @@ class DynamicArray {
 
 export default function ArrayVisualizerPage() {
   const [array] = useState(new DynamicArray(6))
-  const [arrayData, setArrayData] = useState<number[]>([])
+  const [arrayData, setArrayData] = useState<(number | null)[]>([])
   const [fullArray, setFullArray] = useState<(number | null)[]>([])
   const [value, setValue] = useState("")
   const [index, setIndex] = useState("0")
@@ -609,15 +619,17 @@ export default function ArrayVisualizerPage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
       <header className="border-b border-white/10 bg-black/20">
         <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-lg font-semibold text-white">
+          <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-5 w-5" />
-            <span>Array & ArrayList Visualizer</span>
-          </div>
+            <span>Back to Home</span>
+          </Link>
           <div className="ml-auto">
-            <Button variant="outline" className="gap-2">
-              <BookOpen className="h-4 w-4" />
-              Tutorial Mode
-            </Button>
+            <Link href="/tutorials/introduction">
+              <Button variant="outline" className="gap-2">
+                <BookOpen className="h-4 w-4" />
+                Tutorial Mode
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
@@ -754,7 +766,7 @@ export default function ArrayVisualizerPage() {
                               type="number"
                               placeholder="Enter a number"
                               value={value}
-                              onChange={(e) => setValue(e.target.value)}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
                               disabled={isAnimating}
                             />
                           </div>
@@ -771,7 +783,7 @@ export default function ArrayVisualizerPage() {
                                 type="number"
                                 placeholder="Index"
                                 value={index}
-                                onChange={(e) => setIndex(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIndex(e.target.value)}
                                 disabled={isAnimating}
                                 min="0"
                               />
@@ -796,7 +808,7 @@ export default function ArrayVisualizerPage() {
                                 type="number"
                                 placeholder="Index"
                                 value={index}
-                                onChange={(e) => setIndex(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIndex(e.target.value)}
                                 disabled={isAnimating}
                                 min="0"
                               />
@@ -815,7 +827,7 @@ export default function ArrayVisualizerPage() {
                               type="number"
                               placeholder="Index"
                               value={index}
-                              onChange={(e) => setIndex(e.target.value)}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIndex(e.target.value)}
                               disabled={isAnimating}
                               min="0"
                             />
@@ -827,7 +839,7 @@ export default function ArrayVisualizerPage() {
                               type="number"
                               placeholder="Enter new value"
                               value={value}
-                              onChange={(e) => setValue(e.target.value)}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
                               disabled={isAnimating}
                             />
                           </div>
@@ -845,7 +857,7 @@ export default function ArrayVisualizerPage() {
                               type="number"
                               placeholder="Enter a number"
                               value={searchValue}
-                              onChange={(e) => setSearchValue(e.target.value)}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
                               disabled={isAnimating}
                             />
                           </div>

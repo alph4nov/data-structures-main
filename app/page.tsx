@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import { ArrowRight, List, Network, BarChart3, Hash, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -35,25 +36,46 @@ export default function Home() {
                     {
                       title: "Array & ArrayList",
                       description: "Visualize operations on Array and ArrayList",
-                      href: "/array",
+                      // This item has onClick (for scrolling) but NO href
+                      onClick: () => {
+                        const element = document.getElementById('chapter-1');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <List className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Linked List",
                       description: "Visualize operations on a singly linked list",
-                      href: "/linked-list",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-2');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <List className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Stack",
                       description: "Explore LIFO data structure operations",
-                      href: "/stack",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-3');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <BarChart3 className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Queue",
                       description: "Understand FIFO data structure operations",
-                      href: "/queue",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-4');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <AlignJustify className="h-10 w-10 text-purple-400" />,
                     },
                     {
@@ -65,18 +87,29 @@ export default function Home() {
                     {
                       title: "Binary Tree",
                       description: "Explore hierarchical data structure operations",
-                      href: "/binary-tree",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-6');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <GitBranch className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Graph",
                       description: "Visualize nodes and edges with traversals",
-                      href: "/graph",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-8');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
                       icon: <Network className="h-10 w-10 text-purple-400" />,
                     },
-                  ].map((item, index) => (
-                    <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                  ].map((item, index) => {
+                    // 1. Define the Card Visuals (Reuse this for both Link and Div)
+                    const cardContent = (
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -84,19 +117,34 @@ export default function Home() {
                         <CardContent>
                           <p className="text-white/70 text-sm">{item.description}</p>
                           <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
-                            Explore
+                            Jump to topic
                             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                           </div>
                         </CardContent>
                       </Card>
-                    </Link>
-                  ))}
+                    );
+
+                    // 2. Decide: Is it a Link (href) or a Scroll Button (onClick)?
+                    if (item.href) {
+                      return (
+                        <Link key={index} href={item.href} className="group">
+                          {cardContent}
+                        </Link>
+                      );
+                    } else {
+                      return (
+                        <div key={index} onClick={item.onClick} className="group">
+                          {cardContent}
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-1">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 1</CardTitle>
@@ -136,7 +184,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-2">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 2</CardTitle>
@@ -211,7 +259,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-3">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 3</CardTitle>
@@ -276,7 +324,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-4">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 4</CardTitle>
@@ -341,7 +389,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-5">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 5</CardTitle>
@@ -381,7 +429,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-6">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 6</CardTitle>
@@ -451,7 +499,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-7">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 7</CardTitle>
@@ -491,7 +539,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-8">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 8</CardTitle>
@@ -556,7 +604,7 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" id="chapter-9">
             <Card className="card-gradient">
               <CardHeader>
                 <CardTitle className="text-white">Chapter 9</CardTitle>
@@ -609,7 +657,7 @@ export default function Home() {
             <p className="text-center text-sm text-white/60">
               DS EZLearn - Data Structure learning easy - alphanov | Credit to: Pau Aranega Bellido
             </p>
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <a
                 href="https://www.linkedin.com/in/pauaranegabellido"
                 target="_blank"
@@ -628,7 +676,7 @@ export default function Home() {
                 <Github className="h-4 w-4" />
                 <span className="text-sm">GitHub</span>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </footer>
