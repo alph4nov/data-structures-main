@@ -162,6 +162,11 @@ export default function Home() {
                       href: "/array",
                       icon: <List className="h-10 w-10 text-purple-400" />,
                     },
+                    {
+                      title: "Introduction to ArrayList",
+                      description: "Learn what Array and ArrayList are",
+                      href: "/tutorials/arrayList/introduction",
+                    },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
                       <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
@@ -394,46 +399,6 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-white">Chapter 5</CardTitle>
                 <CardDescription className="text-white/70">
-                  Recursion
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent>
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                  {[
-                    {
-                      title: "Array & ArrayList",
-                      description: "Visualize operations on Array and ArrayList",
-                      href: "/array",
-                      icon: <List className="h-10 w-10 text-purple-400" />,
-                    },
-                  ].map((item, index) => (
-                    <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
-                        <CardHeader className="pb-2">
-                          <div className="mb-2">{item.icon}</div>
-                          <CardTitle className="text-white text-lg">{item.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-white/70 text-sm">{item.description}</p>
-                          <div className="mt-4 flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
-                            Explore
-                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-12" id="chapter-6">
-            <Card className="card-gradient">
-              <CardHeader>
-                <CardTitle className="text-white">Chapter 6</CardTitle>
-                <CardDescription className="text-white/70">
                   Binary Tree
                 </CardDescription>
               </CardHeader>
@@ -512,9 +477,9 @@ export default function Home() {
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {[
                     {
-                      title: "Array & ArrayList",
-                      description: "Visualize operations on Array and ArrayList",
-                      href: "/array",
+                      title: "Sorting",
+                      description: "Visualize mutliple type of sort operations",
+                      href: "/sorting",
                       icon: <List className="h-10 w-10 text-purple-400" />,
                     },
                   ].map((item, index) => (
@@ -544,7 +509,7 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-white">Chapter 8</CardTitle>
                 <CardDescription className="text-white/70">
-                  Search
+                  Hashing
                 </CardDescription>
               </CardHeader>
 
