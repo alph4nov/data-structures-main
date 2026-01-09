@@ -512,5 +512,6 @@ export default function StackPage() {
           </div>
         </div>
       </footer>
+      </div>
   )
 }
