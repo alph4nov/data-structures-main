@@ -201,11 +201,6 @@ export default function BinaryTreeTutorialLayout({
           </div>
         </div>
       </footer>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

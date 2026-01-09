@@ -974,5 +974,6 @@ export default function LinkedListPage() {
           </div>
         </div>
       </footer>
+      </div>
   )
 }

@@ -1272,5 +1272,6 @@ export default function BinaryTreePage() {
           </div>
         </div>
       </footer>
+    </div>
   )
 }

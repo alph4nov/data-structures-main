@@ -658,5 +658,6 @@ export default function HashTablePage() {
           </div>
         </div>
       </footer>
+    </div>
   )
 }

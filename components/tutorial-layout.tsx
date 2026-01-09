@@ -205,11 +205,6 @@ export function TutorialLayout({
           </div>
         </div>
       </footer>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
