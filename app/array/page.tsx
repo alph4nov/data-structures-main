@@ -582,7 +582,7 @@ export default function ArrayVisualizerPage() {
   }, [array, arrayData.length])
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-purple text-white">
       <header className="border-b border-white/10 bg-black/50 backdrop-blur supports-[backdrop-filter]:bg-black/60">
         <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2 text-lg font-semibold hover:text-purple-400 transition-colors">
