@@ -61,7 +61,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
         { name: "Lecture 1: Linked Lists 1", size: "393 KB", fileUrl: "/pdfs/chapter-2/Topic 3 - Linked List 1.pdf" },
-        { name: "Lecture 2: Linked Lists 2", size: "403 KB", fileUrl: "/pdfs/chapter-2/Topic 4 - Linked List 2" }
+        { name: "Lecture 2: Linked Lists 2", size: "403 KB", fileUrl: "/pdfs/chapter-2/Topic 4 - Linked List 2.pdf" }
     ]
     },
     {
@@ -70,7 +70,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Detailed notes on LIFO principle and Stack implementations",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Stack", size: "450 KB", fileUrl: "/pdfs/chapter-3/Topic 5 - Stack (1)" }
+        { name: "Lecture 1: Stack", size: "450 KB", fileUrl: "/pdfs/chapter-3/Topic 5 - Stack (1).pdf" }
       ]
     },
     {
