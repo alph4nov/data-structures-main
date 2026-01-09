@@ -27,8 +27,8 @@ const Button = ({ children, className = "", variant = "default", size = "default
   }
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      disabled={disabled}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`},
+      disabled={disabled},
       onClick={onClick}
     >
       {children}
