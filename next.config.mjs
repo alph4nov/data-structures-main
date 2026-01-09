@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',  // <--- MANDATORY: Turns your app into static HTML files for GitHub
+  basePath: '/data-structures-main', // <--- MANDATORY: actual repo name (with the slash)
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -7,12 +9,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: false, // Enable image optimization
+    unoptimized: true, // <--- MANDATORY: GitHub Pages cannot optimize images, this fixes broken images
   },
   experimental: {
     webpackBuildWorker: true,
-    // Removed unnecessary experimental features
   },
 }
 
-export default nextConfig
+export default nextConfig;
