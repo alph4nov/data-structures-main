@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { ArrowLeft, Undo, Play, Pause, SkipForward, Info, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/ui/code-block"
 
-// Sorting Algorithm implementations
+// Optimized Sorting Algorithm implementations
 class SortingAlgorithms {
   // Generate random array
   static generateRandomArray(size: number, min: number = 10, max: number = 100): number[] {
@@ -51,7 +51,6 @@ class SortingAlgorithms {
       }
 
       if (minIndex !== i) {
-        // Swap elements
         [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
         swaps++
         yield {
@@ -134,7 +133,7 @@ class SortingAlgorithms {
     }
   }
 
-  // Merge Sort
+  // Merge Sort - Optimized to yield less frequently
   static *mergeSort(array: number[]): Generator<{
     array: number[]
     comparisons: number
@@ -154,19 +153,25 @@ class SortingAlgorithms {
       const leftArr = arr.slice(left, mid + 1)
       const rightArr = arr.slice(mid + 1, right + 1)
       let i = 0, j = 0, k = left
+      let yieldCount = 0
 
       while (i < leftArr.length && j < rightArr.length) {
         comparisons++
-        yield {
-          array: [...arr],
-          comparisons,
-          mergeOperations,
-          left,
-          right,
-          mid,
-          isMerging: true,
-          sortedIndices: new Set(sortedIndices)
+        
+        // Yield only every 2 comparisons for performance
+        if (yieldCount % 2 === 0) {
+          yield {
+            array: [...arr],
+            comparisons,
+            mergeOperations,
+            left,
+            right,
+            mid,
+            isMerging: true,
+            sortedIndices: new Set(sortedIndices)
+          }
         }
+        yieldCount++
 
         if (leftArr[i] <= rightArr[j]) {
           arr[k] = leftArr[i]
@@ -184,16 +189,6 @@ class SortingAlgorithms {
         i++
         k++
         mergeOperations++
-        yield {
-          array: [...arr],
-          comparisons,
-          mergeOperations,
-          left,
-          right,
-          mid,
-          isMerging: true,
-          sortedIndices: new Set(sortedIndices)
-        }
       }
 
       while (j < rightArr.length) {
@@ -201,16 +196,18 @@ class SortingAlgorithms {
         j++
         k++
         mergeOperations++
-        yield {
-          array: [...arr],
-          comparisons,
-          mergeOperations,
-          left,
-          right,
-          mid,
-          isMerging: true,
-          sortedIndices: new Set(sortedIndices)
-        }
+      }
+
+      // Final yield after completing the merge
+      yield {
+        array: [...arr],
+        comparisons,
+        mergeOperations,
+        left,
+        right,
+        mid,
+        isMerging: true,
+        sortedIndices: new Set(sortedIndices)
       }
     }
 
@@ -266,6 +263,7 @@ class SortingAlgorithms {
     const arr = [...array]
     let comparisons = 0
     let swaps = 0
+    let yieldCount = 0
 
     function* heapify(n: number, i: number): Generator<any> {
       let largest = i
@@ -274,14 +272,17 @@ class SortingAlgorithms {
 
       if (left < n) {
         comparisons++
-        yield {
-          array: [...arr],
-          comparisons,
-          swaps,
-          heapSize: n,
-          currentIndex: i,
-          heapifying: true
+        if (yieldCount % 2 === 0) {
+          yield {
+            array: [...arr],
+            comparisons,
+            swaps,
+            heapSize: n,
+            currentIndex: i,
+            heapifying: true
+          }
         }
+        yieldCount++
         
         if (arr[left] > arr[largest]) {
           largest = left
@@ -290,14 +291,17 @@ class SortingAlgorithms {
 
       if (right < n) {
         comparisons++
-        yield {
-          array: [...arr],
-          comparisons,
-          swaps,
-          heapSize: n,
-          currentIndex: i,
-          heapifying: true
+        if (yieldCount % 2 === 0) {
+          yield {
+            array: [...arr],
+            comparisons,
+            swaps,
+            heapSize: n,
+            currentIndex: i,
+            heapifying: true
+          }
         }
+        yieldCount++
         
         if (arr[right] > arr[largest]) {
           largest = right
@@ -424,10 +428,12 @@ export default function SortingPage() {
   })
 
   // Refs for animation control
-  const animationRef = useRef<NodeJS.Timeout | null>(null)
+  const animationRef = useRef<number | null>(null)
+  const lastUpdateTime = useRef<number>(0)
+  const stepsBuffer = useRef<any[]>([])
 
   // Initialize array
-  const initializeArray = () => {
+  const initializeArray = useCallback(() => {
     const newArray = SortingAlgorithms.generateRandomArray(arraySize)
     setArray(newArray)
     setCurrentStep(0)
@@ -447,10 +453,10 @@ const array = [${newArray.join(", ")}];
 // Select an algorithm and click "Start Sorting" to begin`,
       highlightLines: [1, 4]
     })
-  }
+  }, [arraySize])
 
   // Generate algorithm steps
-  const generateAlgorithmSteps = () => {
+  const generateAlgorithmSteps = useCallback(() => {
     let gen: Generator<any> | null = null
     
     switch (algorithm) {
@@ -469,89 +475,10 @@ const array = [${newArray.join(", ")}];
     }
     
     return gen
-  }
-
-  // Start sorting
-  const startSorting = () => {
-    if (isSorting && !isPaused) {
-      setIsPaused(true)
-      if (animationRef.current) {
-        clearTimeout(animationRef.current)
-      }
-      return
-    }
-
-    if (isPaused) {
-      setIsPaused(false)
-      animateStep()
-      return
-    }
-
-    const gen = generateAlgorithmSteps()
-    if (!gen) return
-
-    setGenerator(gen)
-    setIsSorting(true)
-    setCurrentStep(0)
-    setTotalSteps(0)
-    setCurrentStats({ comparisons: 0, swaps: 0, mergeOperations: 0 })
-    setHighlightedIndices(new Set())
-    setSortedIndices(new Set())
-    
-    // Set initial code snippet based on algorithm
-    setAlgorithmCodeSnippet()
-    
-    animateStep()
-  }
-
-  // Animate a single step
-  const animateStep = () => {
-    if (!generator || isPaused) return
-
-    const result = generator.next()
-    
-    if (result.done) {
-      setIsSorting(false)
-      setIsPaused(false)
-      setCurrentOperation("Sorting Completed!")
-      return
-    }
-
-    const { value } = result
-    setCurrentStep(prev => prev + 1)
-    setArray([...value.array])
-    setCurrentStats({
-      comparisons: value.comparisons || 0,
-      swaps: value.swaps || 0,
-      mergeOperations: value.mergeOperations || 0
-    })
-
-    // Update highlighted indices based on algorithm
-    const newHighlighted = new Set<number>()
-    if (value.currentIndex !== undefined && value.currentIndex >= 0) newHighlighted.add(value.currentIndex)
-    if (value.minIndex !== undefined && value.minIndex >= 0) newHighlighted.add(value.minIndex)
-    if (value.comparingIndex !== undefined && value.comparingIndex >= 0) newHighlighted.add(value.comparingIndex)
-    if (value.keyIndex !== undefined && value.keyIndex >= 0) newHighlighted.add(value.keyIndex)
-    if (value.left !== undefined && value.left >= 0) newHighlighted.add(value.left)
-    if (value.right !== undefined && value.right >= 0) newHighlighted.add(value.right)
-    if (value.mid !== undefined && value.mid >= 0) newHighlighted.add(value.mid)
-    
-    setHighlightedIndices(newHighlighted)
-    
-    // Update sorted indices
-    if (value.sortedIndices) {
-      setSortedIndices(new Set(value.sortedIndices))
-    }
-
-    // Update current operation description
-    updateOperationDescription(value)
-
-    // Continue animation
-    animationRef.current = setTimeout(animateStep, 1000 - speed)
-  }
+  }, [algorithm, array])
 
   // Update operation description
-  const updateOperationDescription = (value: any) => {
+  const updateOperationDescription = useCallback((value: any) => {
     switch (algorithm) {
       case "selection":
         if (value.comparingIndex !== undefined) {
@@ -584,10 +511,105 @@ const array = [${newArray.join(", ")}];
         }
         break
     }
-  }
+  }, [algorithm, array])
+
+  // Process a single step
+  const processStep = useCallback((value: any) => {
+    setArray([...value.array])
+    setCurrentStats({
+      comparisons: value.comparisons || 0,
+      swaps: value.swaps || 0,
+      mergeOperations: value.mergeOperations || 0
+    })
+
+    // Update highlighted indices based on algorithm
+    const newHighlighted = new Set<number>()
+    if (value.currentIndex !== undefined && value.currentIndex >= 0) newHighlighted.add(value.currentIndex)
+    if (value.minIndex !== undefined && value.minIndex >= 0) newHighlighted.add(value.minIndex)
+    if (value.comparingIndex !== undefined && value.comparingIndex >= 0) newHighlighted.add(value.comparingIndex)
+    if (value.keyIndex !== undefined && value.keyIndex >= 0) newHighlighted.add(value.keyIndex)
+    if (value.left !== undefined && value.left >= 0) newHighlighted.add(value.left)
+    if (value.right !== undefined && value.right >= 0) newHighlighted.add(value.right)
+    if (value.mid !== undefined && value.mid >= 0) newHighlighted.add(value.mid)
+    
+    setHighlightedIndices(newHighlighted)
+    
+    // Update sorted indices
+    if (value.sortedIndices) {
+      setSortedIndices(new Set(value.sortedIndices))
+    }
+
+    // Update current operation description
+    updateOperationDescription(value)
+  }, [updateOperationDescription])
+
+  // Animation loop using requestAnimationFrame for smoother animation
+  const animateStep = useCallback((timestamp: number) => {
+    if (!generator || isPaused) return
+
+    // Control frame rate based on speed
+    const frameInterval = Math.max(16, 1000 - speed) // Min 16ms (60fps), Max based on speed
+    const timeSinceLastUpdate = timestamp - lastUpdateTime.current
+    
+    if (timeSinceLastUpdate < frameInterval) {
+      animationRef.current = requestAnimationFrame(animateStep)
+      return
+    }
+
+    lastUpdateTime.current = timestamp
+
+    const result = generator.next()
+    
+    if (result.done) {
+      setIsSorting(false)
+      setIsPaused(false)
+      setCurrentOperation("Sorting Completed!")
+      return
+    }
+
+    setCurrentStep(prev => prev + 1)
+    processStep(result.value)
+
+    // Continue animation
+    animationRef.current = requestAnimationFrame(animateStep)
+  }, [generator, isPaused, speed, processStep])
+
+  // Start sorting
+  const startSorting = useCallback(() => {
+    if (isSorting && !isPaused) {
+      setIsPaused(true)
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+      return
+    }
+
+    if (isPaused) {
+      setIsPaused(false)
+      lastUpdateTime.current = performance.now()
+      animationRef.current = requestAnimationFrame(animateStep)
+      return
+    }
+
+    const gen = generateAlgorithmSteps()
+    if (!gen) return
+
+    setGenerator(gen)
+    setIsSorting(true)
+    setCurrentStep(0)
+    setCurrentStats({ comparisons: 0, swaps: 0, mergeOperations: 0 })
+    setHighlightedIndices(new Set())
+    setSortedIndices(new Set())
+    
+    // Set initial code snippet based on algorithm
+    setAlgorithmCodeSnippet()
+    
+    lastUpdateTime.current = performance.now()
+    animationRef.current = requestAnimationFrame(animateStep)
+  }, [isSorting, isPaused, generateAlgorithmSteps, animateStep])
 
   // Set algorithm code snippet
-  const setAlgorithmCodeSnippet = () => {
+  const setAlgorithmCodeSnippet = useCallback(() => {
     const snippets: Record<string, { title: string; code: string; highlightLines: number[] }> = {
       selection: {
         title: "Selection Sort Algorithm",
@@ -742,48 +764,52 @@ void heapify(int arr[], int n, int i) {
     }
 
     setCurrentCodeSnippet(snippets[algorithm] || snippets.selection)
-  }
+  }, [algorithm])
 
   // Reset sorting
-  const resetSorting = () => {
+  const resetSorting = useCallback(() => {
     if (animationRef.current) {
-      clearTimeout(animationRef.current)
+      cancelAnimationFrame(animationRef.current)
     }
     initializeArray()
     setGenerator(null)
     setIsSorting(false)
     setIsPaused(false)
-  }
+  }, [initializeArray])
 
-  // Skip to end
-  const skipToEnd = async () => {
+  // Skip to end with animation
+  const skipToEnd = useCallback(async () => {
     if (!generator) return
     
     setIsSorting(true)
     setIsPaused(false)
     
-    let result = generator.next()
-    while (!result.done) {
-      const { value } = result
-      setArray([...value.array])
-      setCurrentStats({
-        comparisons: value.comparisons || 0,
-        swaps: value.swaps || 0,
-        mergeOperations: value.mergeOperations || 0
-      })
-      result = generator.next()
+    // Use a fast animation loop for skip to end
+    const fastAnimate = () => {
+      const result = generator.next()
+      
+      if (result.done) {
+        setIsSorting(false)
+        setCurrentOperation("Sorting Completed!")
+        setSortedIndices(new Set(Array.from({ length: array.length }, (_, i) => i)))
+        return
+      }
+
+      processStep(result.value)
+      setCurrentStep(prev => prev + 1)
+      
+      // Use setTimeout with 0 delay to allow UI updates between steps
+      setTimeout(fastAnimate, 0)
     }
     
-    setIsSorting(false)
-    setCurrentOperation("Sorting Completed!")
-    setSortedIndices(new Set(Array.from({ length: array.length }, (_, i) => i)))
-  }
+    fastAnimate()
+  }, [generator, array.length, processStep])
 
   // Clean up on unmount
   useEffect(() => {
     return () => {
       if (animationRef.current) {
-        clearTimeout(animationRef.current)
+        cancelAnimationFrame(animationRef.current)
       }
     }
   }, [])
@@ -791,14 +817,14 @@ void heapify(int arr[], int n, int i) {
   // Initialize on component mount
   useEffect(() => {
     initializeArray()
-  }, [])
+  }, [initializeArray])
 
   // Update generator when algorithm changes
   useEffect(() => {
     if (generator && !isSorting) {
       setAlgorithmCodeSnippet()
     }
-  }, [algorithm])
+  }, [algorithm, generator, isSorting, setAlgorithmCodeSnippet])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -946,7 +972,7 @@ void heapify(int arr[], int n, int i) {
                         {/* Speed Control */}
                         <div>
                           <label className="text-sm font-medium text-white/90 mb-2 block">
-                            Speed: {speed}ms
+                            Speed: {1000 - speed}ms per step
                           </label>
                           <Input
                             type="range"

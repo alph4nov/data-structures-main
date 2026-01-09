@@ -79,16 +79,10 @@ export default function Home() {
                       icon: <AlignJustify className="h-10 w-10 text-purple-400" />,
                     },
                     {
-                      title: "Hash Table",
-                      description: "Visualize key-value storage with hashing",
-                      href: "/hash-table",
-                      icon: <Hash className="h-10 w-10 text-purple-400" />,
-                    },
-                    {
                       title: "Binary Tree",
                       description: "Explore hierarchical data structure operations",
                       onClick: () => {
-                        const element = document.getElementById('chapter-6');
+                        const element = document.getElementById('chapter-5');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
@@ -96,10 +90,32 @@ export default function Home() {
                       icon: <GitBranch className="h-10 w-10 text-purple-400" />,
                     },
                     {
+                      title: "Sorting",
+                      description: "Visualize mutliple type of sort operations",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-6');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
+                      icon: <List className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
+                      title: "Hash Table",
+                      description: "Visualize key-value storage with hashing",
+                      onClick: () => {
+                        const element = document.getElementById('chapter-7');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      },
+                      icon: <Hash className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
                       title: "Graph",
                       description: "Visualize nodes and edges with traversals",
                       onClick: () => {
-                        const element = document.getElementById('chapter-9');
+                        const element = document.getElementById('chapter-8');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
@@ -464,10 +480,10 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12" id="chapter-7">
+          <div className="mt-12" id="chapter-6">
             <Card className="card-gradient">
               <CardHeader>
-                <CardTitle className="text-white">Chapter 7</CardTitle>
+                <CardTitle className="text-white">Chapter 6</CardTitle>
                 <CardDescription className="text-white/70">
                   Sorting
                 </CardDescription>
@@ -504,10 +520,10 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12" id="chapter-8">
+          <div className="mt-12" id="chapter-7">
             <Card className="card-gradient">
               <CardHeader>
-                <CardTitle className="text-white">Chapter 8</CardTitle>
+                <CardTitle className="text-white">Chapter 7</CardTitle>
                 <CardDescription className="text-white/70">
                   Hashing
                 </CardDescription>
@@ -569,10 +585,10 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-12" id="chapter-9">
+          <div className="mt-12" id="chapter-8">
             <Card className="card-gradient">
               <CardHeader>
-                <CardTitle className="text-white">Chapter 9</CardTitle>
+                <CardTitle className="text-white">Chapter 8</CardTitle>
                 <CardDescription className="text-white/70">
                   Graph
                 </CardDescription>
@@ -614,18 +630,9 @@ export default function Home() {
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center gap-3">
             <p className="text-center text-sm text-white/60">
-              DS EZLearn - Data Structure learning easy - alphanov | Credit to: Pau Aranega Bellido
+              DS EZLearn - Data Structure learning easy - alphanov | Based on the open-source project by Pau Aranega Bellido
             </p>
-            {/* <div className="flex items-center gap-4">
-              <a
-                href="https://www.linkedin.com/in/pauaranegabellido"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="text-sm">LinkedIn</span>
-              </a>
+            <div className="flex items-center gap-4">
               <a
                 href="https://github.com/paudefclasspy/data-structures"
                 target="_blank"
@@ -635,7 +642,7 @@ export default function Home() {
                 <Github className="h-4 w-4" />
                 <span className="text-sm">GitHub</span>
               </a>
-            </div> */}
+            </div>
           </div>
         </div>
       </footer>
