@@ -53,7 +53,7 @@ export default function Home() {
           <div className="mt-12">
             <Card className="card-gradient-2">
               <CardHeader>
-                <CardTitle className="text-[1.8rem] text-white text-center">Data Structure Visualizations</CardTitle>
+                <CardTitle className="text-[1.8rem] text-white text-center">Data Structure Topics</CardTitle>
                 <CardDescription className="text-white/70 text-center">
                   Jump to your desired topic!
                 </CardDescription>
