@@ -262,7 +262,6 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
                           <div>
                             <h4 className="text-white font-medium">{slide.name}</h4>
                             <div className="flex items-center gap-4 text-sm text-white/60">
-                              <span>{slide.duration}</span>
                               <span>•</span>
                               <span>{slide.size}</span>
                             </div>
