@@ -1,7 +1,8 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, createContext, useContext } from "react"
 import Link from "next/link"
 import { ArrowLeft, ChevronRight, Info, Plus, Trash, BookOpen, Code, Linkedin, Github, Edit, Search } from "lucide-react"
+
 
 // Simplified components (inline definitions) - UPDATED to match page.tsx style
 interface ButtonProps {
@@ -53,12 +54,17 @@ const Input = ({ className = "", ...props }: any) => (
   />
 )
 
+// Create a Context to handle tab switching without using 'document'
+const TabsContext = createContext<any>(null)
+
 const Tabs = ({ children, defaultValue, className = "" }: any) => {
   const [activeTab, setActiveTab] = useState(defaultValue)
   return (
-    <div className={className} data-active-tab={activeTab}>
-      {children}
-    </div>
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+      <div className={className}>
+        {children}
+      </div>
+    </TabsContext.Provider>
   )
 }
 
@@ -69,20 +75,20 @@ const TabsList = ({ children, className = "" }: any) => (
 )
 
 const TabsTrigger = ({ children, value, className = "" }: any) => {
-  const parent = document.querySelector(`[data-active-tab]`)
-  const activeTab = parent?.getAttribute('data-active-tab')
+  const context = useContext(TabsContext)
+  // Safety check
+  if (!context) return null 
+  
+  const { activeTab, setActiveTab } = context
   const isActive = activeTab === value
   
   return (
     <button
+      type="button"
       className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
         isActive ? 'bg-background text-foreground shadow-sm' : 'hover:bg-accent hover:text-accent-foreground'
       } ${className}`}
-      onClick={() => {
-        const parent = document.querySelector(`[data-active-tab]`)
-        if (parent) parent.setAttribute('data-active-tab', value)
-        window.dispatchEvent(new Event('tabchange'))
-      }}
+      onClick={() => setActiveTab(value)}
     >
       {children}
     </button>
@@ -90,17 +96,18 @@ const TabsTrigger = ({ children, value, className = "" }: any) => {
 }
 
 const TabsContent = ({ children, value, className = "" }: any) => {
-  const [activeTab, setActiveTab] = useState('')
+  const context = useContext(TabsContext)
+  if (!context) return null
+  const { activeTab } = context
   
-  useEffect(() => {
-    const parent = document.querySelector(`[data-active-tab]`)
-    const currentTab = parent?.getAttribute('data-active-tab')
-    setActiveTab(currentTab || '')
-    
-    const handleTabChange = () => {
-      const newTab = parent?.getAttribute('data-active-tab')
-      setActiveTab(newTab || '')
-    }
+  if (activeTab !== value) return null
+  
+  return (
+    <div className={`mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`}>
+      {children}
+    </div>
+  )
+}
     
     window.addEventListener('tabchange', handleTabChange)
     return () => window.removeEventListener('tabchange', handleTabChange)
