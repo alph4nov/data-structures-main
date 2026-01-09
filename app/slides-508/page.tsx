@@ -49,8 +49,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       slides: [
         { 
           name: "Lecture 1: Arrays",
-          duration: "45 slides",
-          size: "2.4 MB",
+          size: "400 KB",
           fileUrl: "/pdfs/chapter-1/Topic 2 - Array.pdf"
         }
       ]
@@ -61,8 +60,8 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Comprehensive notes on Singly, Doubly, and Circular Linked Lists",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Linked Lists 1", duration: "38 slides", size: "2.1 MB", fileUrl: "/pdfs/chapter-2/Topic 3 - Linked List 1.pdf" },
-        { name: "Lecture 2: Linked Lists 2", duration: "38 slides", size: "2.1 MB", fileUrl: "/pdfs/chapter-2/Topic 4 - Linked List 2" }
+        { name: "Lecture 1: Linked Lists 1", size: "393 KB", fileUrl: "/pdfs/chapter-2/Topic 3 - Linked List 1.pdf" },
+        { name: "Lecture 2: Linked Lists 2", size: "403 KB", fileUrl: "/pdfs/chapter-2/Topic 4 - Linked List 2" }
     ]
     },
     {
@@ -71,7 +70,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Detailed notes on LIFO principle and Stack implementations",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Stack", duration: "40 slides", size: "2.2 MB", fileUrl: "/pdfs/chapter-3/Topic 5 - Stack (1)" }
+        { name: "Lecture 1: Stack", size: "450 KB", fileUrl: "/pdfs/chapter-3/Topic 5 - Stack (1)" }
       ]
     },
     {
@@ -80,7 +79,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Complete guide to Queue data structure and its variants",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Queue", duration: "35 slides", size: "1.9 MB", fileUrl: "/pdfs/chapter-4/Topic 6 - Queue (2).pdf" }
+        { name: "Lecture 1: Queue", size: "482 KB", fileUrl: "/pdfs/chapter-4/Topic 6 - Queue (2).pdf" }
       ]
     },
     {
@@ -89,8 +88,8 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Extensive notes on Tree data structures and traversals",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Tree 1", duration: "50 slides", size: "2.8 MB", fileUrl: "/pdfs/chapter-5/Topic 8 - Tree 1.pdf" },
-        { name: "Lecture 2: Tree 2", duration: "50 slides", size: "2.8 MB", fileUrl: "/pdfs/chapter-5/Topic 9 - Tree 2.pdf" }
+        { name: "Lecture 1: Tree 1", size: "522 KB", fileUrl: "/pdfs/chapter-5/Topic 8 - Tree 1.pdf" },
+        { name: "Lecture 2: Tree 2", size: "690 KB", fileUrl: "/pdfs/chapter-5/Topic 9 - Tree 2.pdf" }
       ]
     },
     {
@@ -99,7 +98,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Complete analysis of all major sorting algorithms",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Sorting", duration: "48 slides", size: "2.7 MB", fileUrl: "/pdfs/chapter-6/Topic 10 - Sorting.pdf" }
+        { name: "Lecture 1: Sorting", size: "500 KB", fileUrl: "/pdfs/chapter-6/Topic 10 - Sorting.pdf" }
       ]
     },
     {
@@ -108,7 +107,7 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Detailed notes on Hashing, Collision Resolution techniques",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Hashing", duration: "40 slides", size: "2.2 MB", fileUrl: "/pdfs/chapter-7/Topic 12 - Hashing.pdf" }
+        { name: "Lecture 1: Hashing", size: "470 KB", fileUrl: "/pdfs/chapter-7/Topic 12 - Hashing.pdf" }
       ]
     },
     {
@@ -117,8 +116,8 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Comprehensive graph theory and algorithm notes",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Graph 1", duration: "45 slides", size: "2.5 MB", fileUrl: "/pdfs/chapter-8/Topic 13 - Graph 1.pdf" },
-        { name: "Lecture 2: Graph 2", duration: "45 slides", size: "2.5 MB", fileUrl: "/pdfs/chapter-8/Topic 14 - Graph 2.pdf" }
+        { name: "Lecture 1: Graph 1", size: "490 KB", fileUrl: "/pdfs/chapter-8/Topic 13 - Graph 1.pdf" },
+        { name: "Lecture 2: Graph 2", size: "641 KB", fileUrl: "/pdfs/chapter-8/Topic 14 - Graph 2.pdf" }
       ]
     },
     {
@@ -127,8 +126,8 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
       description: "Comprehensive graph theory and algorithm notes",
       icon: <FileText className="h-8 w-8 text-purple-400" />,
       slides: [
-        { name: "Lecture 1: Recursion", duration: "45 slides", size: "2.5 MB", fileUrl: "/pdfs/extra/Topic 7 - Recursion (2).pdf" },
-        { name: "Lecture 2: Searching", duration: "45 slides", size: "2.5 MB", fileUrl: "/pdfs/extra/Topic 11 - Searching.pdf" }
+        { name: "Lecture 1: Recursion", size: "764 KB", fileUrl: "/pdfs/extra/Topic 7 - Recursion (2).pdf" },
+        { name: "Lecture 2: Searching", size: "297 KB", fileUrl: "/pdfs/extra/Topic 11 - Searching.pdf" }
       ]
     }
   ]
@@ -137,19 +136,19 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
 //     {
 //       title: "Complete Course Bundle",
 //       description: "All lecture notes in one comprehensive PDF",
-//       size: "45.2 MB",
+//       size: "45.2 KB",
 //       icon: <BookOpen className="h-6 w-6 text-green-400" />
 //     },
 //     {
 //       title: "Cheat Sheets",
 //       description: "Quick reference for time complexities",
-//       size: "8.7 MB",
+//       size: "8.7 KB",
 //       icon: <File className="h-6 w-6 text-blue-400" />
 //     },
 //     {
 //       title: "Exam Preparation Guide",
 //       description: "Important concepts and practice problems",
-//       size: "12.3 MB",
+//       size: "12.3 KB",
 //       icon: <FileDown className="h-6 w-6 text-yellow-400" />
 //     }
 //   ]
