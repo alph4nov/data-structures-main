@@ -4,12 +4,12 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { ArrowLeft, ArrowRight, Home, Menu, X, GitBranch, Linkedin, Github } from "lucide-react"
+import { ArrowLeft, ArrowRight, Home, Menu, X, List, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { cn } from "@/lib/utils"
 
-interface BinaryTreeTutorialLayoutProps {
+interface TutorialLayoutProps {
   children: React.ReactNode
   title: string
   description: string
@@ -20,15 +20,16 @@ interface BinaryTreeTutorialLayoutProps {
 }
 
 const tutorialRoutes = [
-  { path: "/tutorials/binary-tree/introduction", title: "Introduction to Binary Trees" },
-  { path: "/tutorials/binary-tree/insert-operation", title: "Insert Operation" },
-  { path: "/tutorials/binary-tree/search-operation", title: "Search Operation" },
-  { path: "/tutorials/binary-tree/delete-operation", title: "Delete Operation" },
-  { path: "/tutorials/binary-tree/traversal-operation", title: "Traversal Operation" },
-  { path: "/tutorials/binary-tree/applications", title: "Applications of Binary Trees" },
+  { path: "/tutorials/graphs/introduction", title: "Introduction to Sort" },
+  { path: "/tutorials/graphs/graph-representation", title: "Graph Representation" },
+  { path: "/tutorials/graphs/depth-first-search", title: "Depth-First Search (DFS)" },
+  { path: "/tutorials/graphs/breadth-first-search", title: "Breadth-First Search (BFS)" },
+  { path: "/tutorials/graphs/shortest-path", title: "Shortest Path Algorithms" },
+  { path: "/tutorials/graphs/applications", title: "Graph Applications" },
+  { path: "/tutorials/graphs/best-practices", title: "Best Practices" },
 ]
 
-export default function BinaryTreeTutorialLayout({
+export function TutorialLayout({
   children,
   title,
   description,
@@ -36,17 +37,20 @@ export default function BinaryTreeTutorialLayout({
   totalSteps,
   prevHref,
   nextHref,
-}: BinaryTreeTutorialLayoutProps) {
+}: TutorialLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
+  // Close sidebar on route change
   useEffect(() => {
     setIsSidebarOpen(false)
   }, [pathname])
 
+  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Only if not in an input field
       if (document.activeElement?.tagName === "INPUT") return
 
       if (e.key === "ArrowLeft" && prevHref) {
@@ -62,6 +66,7 @@ export default function BinaryTreeTutorialLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-purple">
+      {/* Mobile header */}
       <header className="lg:hidden border-b border-white/10 bg-black/20">
         <div className="container flex h-16 items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-white">
@@ -75,6 +80,7 @@ export default function BinaryTreeTutorialLayout({
       </header>
 
       <div className="flex flex-1">
+        {/* Sidebar */}
         <aside
           className={cn(
             "fixed inset-y-0 left-0 z-50 w-64 border-r border-white/10 bg-black/30 backdrop-blur-md transform transition-transform lg:translate-x-0 lg:static lg:z-0",
@@ -89,8 +95,8 @@ export default function BinaryTreeTutorialLayout({
           </div>
           <nav className="p-4">
             <div className="flex items-center mb-4 text-white">
-              <GitBranch className="h-5 w-5 mr-2 text-purple-400" />
-              <p className="text-sm font-semibold uppercase tracking-wider text-white/50">Binary Tree Tutorials</p>
+              <List className="h-5 w-5 mr-2 text-purple-400" />
+              <p className="text-sm font-semibold uppercase tracking-wider text-white/50">Graphs Tutorials</p>
             </div>
             <ul className="space-y-1">
               {tutorialRoutes.map((route) => (
@@ -112,26 +118,24 @@ export default function BinaryTreeTutorialLayout({
           </nav>
         </aside>
 
+        {/* Main content */}
         <main className="flex-1">
           <div className="container px-4 py-8 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl">
+              {/* Progress bar */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-2">
                   <h2 className="text-sm font-medium text-white/70">
                     Step {currentStep} of {totalSteps}
                   </h2>
                   <span className="text-sm text-white/70">
-                    {!nextHref && prevHref
-                      ? 100
-                      : currentStep && totalSteps
-                        ? Math.round((currentStep / totalSteps) * 100)
-                        : 0}
-                    % Complete
+                    {Math.round((currentStep / totalSteps) * 100)}% Complete
                   </span>
                 </div>
-                <Progress value={!nextHref && prevHref ? 100 : (currentStep / totalSteps) * 100} className="h-2" />
+                <Progress value={(currentStep / totalSteps) * 100} className="h-2" />
               </div>
 
+              {/* Tutorial content */}
               <div className="space-y-6">
                 <div>
                   <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
@@ -140,6 +144,7 @@ export default function BinaryTreeTutorialLayout({
 
                 <div className="card-gradient rounded-xl p-6">{children}</div>
 
+                {/* Navigation buttons */}
                 <div className="flex justify-between pt-4">
                   {prevHref ? (
                     <Link href={prevHref}>
@@ -196,11 +201,6 @@ export default function BinaryTreeTutorialLayout({
               >
                 <Github className="h-4 w-4" />
                 <span className="text-sm">GitHub (this version)</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
               </a>
             </div>
           </div>

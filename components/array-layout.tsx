@@ -21,11 +21,11 @@ interface TutorialLayoutProps {
 
 const tutorialRoutes = [
   { path: "/tutorials/arrayList/introduction", title: "Introduction to Array" },
-  { path: "/tutorials/creating-nodes", title: "Creating Nodes" },
-  { path: "/tutorials/insertion", title: "Insertion Operations" },
-  { path: "/tutorials/deletion", title: "Deletion Operations" },
-  { path: "/tutorials/searching", title: "Searching Operations" },
-  { path: "/tutorials/traversal", title: "Traversal Operations" },
+  { path: "/tutorials/arrayList/add-operation", title: "Add Operations" },
+  { path: "/tutorials/arrayList/remove-operation", title: "Remove Operations" },
+  { path: "/tutorials/arrayList/search-operation", title: "Search Operations" },
+  { path: "/tutorials/arrayList/applications", title: "Application of ArrayList" },
+  { path: "/tutorials/arrayList/best-practices", title: "Best Practice" },
 ]
 
 export function TutorialLayout({
@@ -180,8 +180,28 @@ export function TutorialLayout({
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center gap-3">
             <p className="text-center text-sm text-white/60">
-              Data Structures Visualizer - An interactive learning tool
+              DS EZLearn - Data Structure learning easy - alphanov | Based on the open-source project by Pau Aranega Bellido
             </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://github.com/paudefclasspy/data-structures"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
+              >
+                <Github className="h-4 w-4" />
+                <span className="text-sm">GitHub (original)</span>
+              </a>
+              <a
+                href="https://github.com/alph4nov/data-structures-main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
+              >
+                <Github className="h-4 w-4" />
+                <span className="text-sm">GitHub (this version)</span>
+              </a>
+            </div>
           </div>
         </div>
       </footer>

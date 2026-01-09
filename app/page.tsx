@@ -206,6 +206,26 @@ export default function Home() {
                       description: "Learn what Array and ArrayList are",
                       href: "/tutorials/arrayList/introduction",
                     },
+                    {
+                      title: "Add Operations",
+                      description: "Learn the logic to do add operation using ArrayList",
+                      href: "/tutorials/arrayList/add-operation",
+                    },
+                    {
+                      title: "Remove Operations",
+                      description: "Learn the logic to do remove operation using ArrayList",
+                      href: "/tutorials/arrayList/remove-operation",
+                    },
+                    {
+                      title: "Search Operations",
+                      description: "Learn how to do search operation using ArrayList",
+                      href: "/tutorials/arrayList/search-operation",
+                    },
+                    {
+                      title: "Applications of ArrayList",
+                      description: "Explore the real-world uses of ArrayList",
+                      href: "/tutorials/arrayList/applications",
+                    },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
                       <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
@@ -521,6 +541,36 @@ export default function Home() {
                       href: "/sorting",
                       icon: <AlignEndHorizontal className="h-10 w-10 text-purple-400" />,
                     },
+                    {
+                      title: "Introduction to Sorting",
+                      description: "Learn what sorting algorithms are and why they're important",
+                      href: "/tutorials/sorting/introduction",
+                    },
+                    {
+                      title: "Selection Sort",
+                      description: "Explore how selection sort algorithm works",
+                      href: "/tutorials/sorting/selection-sort",
+                    },
+                    {
+                      title: "Insertion Sort",
+                      description: "Explore how insertion sort algorithm works",
+                      href: "/tutorials/sorting/insertion-sort",
+                    },
+                    {
+                      title: "Heap Sort",
+                      description: "Explore how heap sort algorithm works",
+                      href: "/tutorials/sorting/heap-sort",
+                    },
+                    {
+                      title: "Merge Sort",
+                      description: "Explore how merge sort algorithm works",
+                      href: "/tutorials/sorting/merge-sort",
+                    },
+                    {
+                      title: "Applications of Sorting",
+                      description: "Discover real-world applications of sorting algorithms",
+                      href: "/tutorials/sorting/applications",
+                    },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
                       <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
@@ -625,6 +675,36 @@ export default function Home() {
                       description: "Visualize nodes and edges with traversals",
                       href: "/graph",
                       icon: <Network className="h-10 w-10 text-purple-400" />,
+                    },
+                    {
+                      title: "Introduction to Graph",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/tutorials/graphs/introduction",
+                    },
+                    {
+                      title: "Graph Representations",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/tutorials/graphs/graph-representation",
+                    },
+                    {
+                      title: "DFS",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/tutorials/graphs/depth-first-search",
+                    },
+                    {
+                      title: "BFS",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/tutorials/graphs/breadth-first-search",
+                    },
+                    {
+                      title: "Shortest Path Algorithms",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/turorials/graphs/shortest-path-algorithms",
+                    },
+                    {
+                      title: "Graph Applications",
+                      description: "Visualize nodes and edges with traversals",
+                      href: "/turorials/graphs/applications",
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">

@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
-import { ArrowLeft, Undo, Play, Pause, SkipForward, Info, Linkedin, Github } from "lucide-react"
+import { ArrowLeft, Undo, Play, Pause, SkipForward, BookOpen, Info, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -828,12 +828,20 @@ void heapify(int arr[], int n, int i) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-white/10 bg-black/20">
-        <div className="container flex h-16 items-center px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-white">
+      <header className="border-b border-white/10 bg-black/50 backdrop-blur supports-[backdrop-filter]:bg-black/60">
+        <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
+          <Link href="/" className="flex items-center gap-2 text-lg font-semibold hover:text-purple-400 transition-colors">
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Home</span>
           </Link>
+          <div className="ml-auto">
+            <Link href="/tutorials/sorting/introduction">
+              <Button variant="outline" className="gap-2">
+                <BookOpen className="h-4 w-4" />
+                Tutorial Mode
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -1135,6 +1143,15 @@ void heapify(int arr[], int n, int i) {
                             Sorting rearranges elements in ascending or descending order to improve operations like searching.
                           </p>
                         </div>
+
+                        <div className="pt-4 mt-4 border-t border-white/20">
+                          <Link href="/tutorials/sorting/introduction">
+                            <Button variant="outline" size="sm" className="w-full">
+                              <BookOpen className="mr-2 h-4 w-4" />
+                              Learn More in Tutorial Mode
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -1149,18 +1166,9 @@ void heapify(int arr[], int n, int i) {
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center gap-3">
             <p className="text-center text-sm text-white/60">
-              Data Structures Visualizer - An interactive learning tool
+              DS EZLearn - Data Structure learning easy - alphanov | Based on the open-source project by Pau Aranega Bellido
             </p>
             <div className="flex items-center gap-4">
-              <a
-                href="https://www.linkedin.com/in/pauaranegabellido"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="text-sm">LinkedIn</span>
-              </a>
               <a
                 href="https://github.com/paudefclasspy/data-structures"
                 target="_blank"
@@ -1168,7 +1176,16 @@ void heapify(int arr[], int n, int i) {
                 className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
               >
                 <Github className="h-4 w-4" />
-                <span className="text-sm">GitHub</span>
+                <span className="text-sm">GitHub (original)</span>
+              </a>
+              <a
+                href="https://github.com/alph4nov/data-structures-main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
+              >
+                <Github className="h-4 w-4" />
+                <span className="text-sm">GitHub (this version)</span>
               </a>
             </div>
           </div>

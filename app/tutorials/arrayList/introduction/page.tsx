@@ -10,7 +10,7 @@ export default function ArrayTutorialPage() {
       description="Learn about static arrays, dynamic arrays (ArrayLists), and their practical applications"
       currentStep={1}
       totalSteps={6}
-      nextHref="/tutorials/array-operations"
+      nextHref="/tutorials/arrayList/add-operation"
     >
       <div className="space-y-6 text-white">
         <section>
