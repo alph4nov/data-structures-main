@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { ArrowRight, List, Network, BarChart3, Hash, AlignEndHorizontal, House, FileDown, Brackets, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
+import { ArrowRight, List, Network, BarChart3, Hash, AlignEndHorizontal, House, FileDown, FileQuestion, Brackets, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -18,13 +18,21 @@ export default function Home() {
         <House className="h-5 w-5" />
         <span>DS EZLearn</span>
           </button>
-          <div className="ml-auto">
-        <Link href="/slides-508">
-          <Button variant="outline" className="gap-2">
-            <FileDown className="h-4 w-4" />
-            Download Lecture Notes
-          </Button>
-        </Link>
+          <div className="ml-auto bg-orange-600/10 p-1 rounded-md">
+          <Link href="/quiz">
+            <Button variant="outline" className="gap-1">
+              <FileQuestion className="h-4 w-4" />
+              Quiz Mode
+            </Button>
+          </Link>
+          </div>
+          <div className="ml-5">
+          <Link href="/slides-508">
+            <Button variant="outline" className="gap-2">
+              <FileDown className="h-4 w-4" />
+              Download Lecture Notes
+            </Button>
+          </Link>
           </div>
         </div>
       </header>
