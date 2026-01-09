@@ -73,6 +73,12 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.card-gradient-2 {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.155) 0%, rgba(36, 35, 35, 0.181) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .button-gradient {
   background: linear-gradient(90deg, #6d28d9 0%, #7c3aed 100%);
   transition: all 0.3s ease;

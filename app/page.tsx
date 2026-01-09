@@ -22,7 +22,7 @@ export default function Home() {
           </div>
 
           <div className="mt-12">
-            <Card className="card-gradient">
+            <Card className="card-gradient-2">
               <CardHeader>
                 <CardTitle className="text-[1.8rem] text-white text-center">Data Structure Visualizations</CardTitle>
                 <CardDescription className="text-white/70 text-center">
@@ -125,7 +125,7 @@ export default function Home() {
                   ].map((item, index) => {
                     // 1. Define the Card Visuals (Reuse this for both Link and Div)
                     const cardContent = (
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors cursor-pointer">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -179,7 +179,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -254,7 +254,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -319,7 +319,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -384,7 +384,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -454,7 +454,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -494,7 +494,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -559,7 +559,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
@@ -599,7 +599,7 @@ export default function Home() {
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
-                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                      <Card className="h-full border-white/10 bg-white/5 hover:bg-white/20 transition-colors">
                         <CardHeader className="pb-2">
                           <div className="mb-2">{item.icon}</div>
                           <CardTitle className="text-white text-lg">{item.title}</CardTitle>
