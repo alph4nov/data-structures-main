@@ -1,12 +1,33 @@
 "use client"
 import Link from "next/link"
-import { ArrowRight, List, Network, BarChart3, Hash, AlignEndHorizontal, Brackets, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
+import { ArrowRight, List, Network, BarChart3, Hash, AlignEndHorizontal, House, FileDown, Brackets, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-purple">
+      <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
+          <button onClick={() => {
+        const element = document.querySelector('h1');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+          }} className="flex items-center gap-2 text-lg font-semibold hover:text-primary transition-colors cursor-pointer">
+        <House className="h-5 w-5" />
+        <span>DS EZLearn</span>
+          </button>
+          <div className="ml-auto">
+        <Link href="/slides-508">
+          <Button variant="outline" className="gap-2">
+            <FileDown className="h-4 w-4" />
+            Download Lecture Notes
+          </Button>
+        </Link>
+          </div>
+        </div>
+      </header>
       <div className="container px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="text-center space-y-4">
@@ -634,7 +655,16 @@ export default function Home() {
                 className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
               >
                 <Github className="h-4 w-4" />
-                <span className="text-sm">GitHub</span>
+                <span className="text-sm">GitHub (original)</span>
+              </a>
+              <a
+                href="https://github.com/alph4nov/data-structures-main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-white/60 hover:text-purple-400 transition-colors"
+              >
+                <Github className="h-4 w-4" />
+                <span className="text-sm">GitHub (this version)</span>
               </a>
             </div>
           </div>
