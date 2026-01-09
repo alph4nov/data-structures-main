@@ -236,14 +236,6 @@ const handleRealDownload = async (pdfUrl: string | undefined, fileName: string) 
                         {chapter.title}
                       </CardDescription>
                     </div>
-                    <Button 
-                      variant="outline" 
-                      className="border-green-400 text-green-300 hover:bg-green-400/20"
-                      onClick={() => handleRealDownload(`${chapter.chapter} - ${chapter.title} Bundle`, chapter.title)}
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Download All ({chapter.slides.length} PDFs)
-                    </Button>
                   </div>
                 </CardHeader>
                 <CardContent>
