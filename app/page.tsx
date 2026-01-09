@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { ArrowRight, List, Network, BarChart3, Hash, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
+import { ArrowRight, List, Network, BarChart3, Hash, AlignEndHorizontal, Brackets, GitBranch, AlignJustify, Linkedin, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -10,22 +10,22 @@ export default function Home() {
       <div className="container px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-yellow-400">
+            <h1 className="text-[5rem] font-bold tracking-tight text-white-500" style={{ WebkitTextStroke: '1px rgb(5, 46, 22)' }}>
               DS EZLearn
             </h1>
-            <h2 className="text-4xl font-regular tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-yellow-400">
+            <h2 className="text-4xl font-regular tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
               Data Structure Visualizer
             </h2>
             <p className="text-lg text-white/80">
-              Learn data structures through interactive visualizations and step-by-step tutorials
+              Enhance data structures learning with the help of interactive visualisations and step-by-step tutorials
             </p>
           </div>
 
           <div className="mt-12">
             <Card className="card-gradient">
               <CardHeader>
-                <CardTitle className="text-white">Data Structure Visualizations</CardTitle>
-                <CardDescription className="text-white/70">
+                <CardTitle className="text-[1.8rem] text-white text-center">Data Structure Visualizations</CardTitle>
+                <CardDescription className="text-white/70 text-center">
                   Jump to your desired topic!
                 </CardDescription>
               </CardHeader>
@@ -43,7 +43,7 @@ export default function Home() {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
                       },
-                      icon: <List className="h-10 w-10 text-purple-400" />,
+                      icon: <Brackets className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Linked List",
@@ -98,7 +98,7 @@ export default function Home() {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
                       },
-                      icon: <List className="h-10 w-10 text-purple-400" />,
+                      icon: <AlignEndHorizontal className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Hash Table",
@@ -140,14 +140,8 @@ export default function Home() {
                       </Card>
                     );
 
-                    // 2. Decide: Is it a Link (href) or a Scroll Button (onClick)?
-                    if (item.href) {
-                      return (
-                        <Link key={index} href={item.href} className="group">
-                          {cardContent}
-                        </Link>
-                      );
-                    } else {
+                    // 2. Scroll Button (onClick)?
+                    if (item.onClick) {
                       return (
                         <div key={index} onClick={item.onClick} className="group">
                           {cardContent}
@@ -176,7 +170,7 @@ export default function Home() {
                       title: "Array & ArrayList",
                       description: "Visualize operations on Array and ArrayList",
                       href: "/array",
-                      icon: <List className="h-10 w-10 text-purple-400" />,
+                      icon: <Brackets className="h-10 w-10 text-purple-400" />,
                     },
                     {
                       title: "Introduction to ArrayList",
@@ -496,7 +490,7 @@ export default function Home() {
                       title: "Sorting",
                       description: "Visualize mutliple type of sort operations",
                       href: "/sorting",
-                      icon: <List className="h-10 w-10 text-purple-400" />,
+                      icon: <AlignEndHorizontal className="h-10 w-10 text-purple-400" />,
                     },
                   ].map((item, index) => (
                     <Link key={index} href={item.href} className="group">
